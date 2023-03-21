@@ -1,46 +1,41 @@
-# vue-project
+# vue-waimai-h5
 
-This template should help get you started developing with Vue 3 in Vite.
+## husky 管理 Git Hooks
 
-## Recommended IDE Setup
+安装 husky
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```shell
+npx husky-init && npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 管理 commitlint
 
-```sh
-npm run dev
+commitlint (https://github.com/conventional-changelog/commitlint) 检测 git commit 内容是否符合定义的规范
+
+在开发项目时产生大量的 commit 版本， 这些 commit 记录了整个项目的开发进程，当我们需要通过 commit 来回顾项目开发进展或者回退版本时，良好的 commit 信息可以帮我们快速了解但是开发和修改的需求背景和动机。
+
+commitlint 会提供一套规范来约束项目的 commit 信息，并在提供 commit 的时候自动校验。
+
+规范要求我们按以下规定来填写 commit 信息：
+
+```
+type(scope?):subject
 ```
 
-### Type-Check, Compile and Minify for Production
+- `type` 表示 commit 的类型
+- `scope` 是可选的，表示当前 commit 的修改范围
+- `subject` 就是描述 commit 的详细说明
 
-```sh
-npm run build
-```
+根据规范 type 可以为一下这些值
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- build
+- chore
+- ci
+- docs
+- feat（新功能）
+- fix（修复）
+- perf（性能）
+- refactor（重构）
+- revert
+- style
+- test
