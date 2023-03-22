@@ -202,3 +202,31 @@ json-server 是 Mock Server 搭建工具，可以轻易搭建拥有完整 REST A
 ### 反向代理如何解决跨域问题
 
 ### vite 代理
+
+使用 proxy
+
+## axios
+
+### 业务状态码
+
+扩展请求状态
+
+```json
+{
+  "name": "test",
+  "desc": "我是自定义测试数据"
+}
+```
+
+```json
+{
+  "code": 0,
+  "msg": "请求成功",
+  "data": {
+    "name": "test",
+    "desc": "我是自定义测试数据"
+  }
+}
+```
+
+### 设置请求拦截
