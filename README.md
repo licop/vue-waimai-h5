@@ -115,3 +115,52 @@ indent_style = space
 # quote_type = single // ts文件中为单引方式
 
 ```
+
+## lint-staged
+
+之前使用了 husky 的 hook —— pre-commit 来在 commit 代码之前对代码做一些检验处理，下面我们将使用 lint-staged 来处理检验任务。
+
+**什么是 lint-staged？**
+
+lint-staged 是用来在 commit 代码前来统一运行校验任务的。在终端运行以下命令安装 lint-staged。
+
+```
+npm i lint-staged -D
+```
+
+**修改 pre-commit**
+
+接着将 .husky/pre commit 文件里的 npm test 改成 npm run pre-commit
+
+**修改 package.json**
+
+然后我们需要修改 package.json。在 scripts 里增加 pre-commit 命令，另外还需要在 scripts 同层增加 lint-staged 的配置。
+
+```json
+"scripts": {
+  "dev": "vite",
+  "build": "run-p type-check build-only",
+  "preview": "vite preview --port 4173",
+  "build-only": "vite build",
+  "type-check": "vue-tsc --noEmit",
+  "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+  "prepare": "husky install",
+  // 在这里增加 pre-commit 命令
+  "pre-commit": "lint-staged"
+},
+// 在这里增加 lint-staged 配置
+"lint-staged": {
+  "src/**/*.{ts,vue}": [
+    "prettier --write",
+    "eslint --fix"
+  ]
+}
+```
+
+## vue-router
+
+### 如何配置路由
+
+- 内容组件渲染的地方： `<router-view>`
+- 路由和组件的对应关系： router 实例 config
+- 触发路由跳转的地方：`<router-link>` 和 代码动态设置
