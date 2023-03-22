@@ -164,3 +164,41 @@ npm i lint-staged -D
 - 内容组件渲染的地方： `<router-view>`
 - 路由和组件的对应关系： router 实例 config
 - 触发路由跳转的地方：`<router-link>` 和 代码动态设置
+
+## 使用 json-server 搭建 Mock Server
+
+json-server 是 Mock Server 搭建工具，可以轻易搭建拥有完整 REST API 的轻量级后端服务
+
+使用 json-server 方式
+
+- 通过 json-server 命令启动一个服务
+- 通过 module 将 json-server 引入到自己的 node 服务
+
+## 使用 Vite 配置请求代理
+
+跨域和反向代理的相关概念
+
+### 什么是跨域
+
+### 为什么要限制跨域
+
+出于安全性，浏览器会限制脚本内发起跨源 HTTP 请求, 包含 XMLHttpRequest 和 Featch API
+
+### 如何解决跨域
+
+- jsonp：`<script>`不受同源策略限制
+- 跨源域资源共享 CORS：允许 Web 应用服务器进行跨源访问控制
+- 使不同的源变成同源，具体的实现方案就是**反向代理**
+
+### 什么是反向代理
+
+代理： 请求转发
+
+代理服务器类型
+
+- 正向代理： 客户端告诉代理服务器资源的地址
+- 反向代理： 客户端只告诉要什么资源
+
+### 反向代理如何解决跨域问题
+
+### vite 代理

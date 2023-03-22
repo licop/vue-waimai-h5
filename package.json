@@ -1,7 +1,7 @@
 {
-  "name": "vue-project",
-  "version": "0.0.0",
-  "private": true,
+  "name": "vue-waimai-h5",
+  "version": "1.0.0",
+  "author": "licop",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
