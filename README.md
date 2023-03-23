@@ -230,3 +230,44 @@ json-server 是 Mock Server 搭建工具，可以轻易搭建拥有完整 REST A
 ```
 
 ### 设置请求拦截
+
+## 使用 post-css 实现移动端的适配
+
+移动端适配影响用户获取的信息量和体验
+
+**什么是移动端适配？**
+
+- 移动端不像 PC 端，有足够大的屏幕展示内容
+- 不同的移动端设备，有不同的屏幕宽度
+
+**常用适配方案**
+
+- 不同端使用不同代码，比如 pc 端一套代码，移动端一套代码
+- 不同端使用同一套代码，一般使用 css 样式来控制 @meidia
+- 移动端屏幕适配
+  - 利用 rem 按根节点（body）的字体大小来缩放
+  - 利用 vh/vw 按照屏幕的宽度和高度来缩放
+
+**rem 适配方案**
+
+rem 是跟 px 类似的 CSS 数量单位, 当前属性大小值按根节点 body 的 font-size 等比例计算，比如如果 body 的 font-size 是 16px。 1rem 就等于 16px
+
+- 将 css 属性单位从 px 改为 rem
+- 动态获取用户设备的屏幕宽度
+- 计算 body 的 fontsize: fontsize(body) = width(屏幕) \* fontSiz(设计稿中的 body)/witdh(设计稿中的屏幕)
+- px 转 rem rem(css 属性) = px(css 属性)/px(body 的 fontsize) 可以使用 post-css
+
+**什么是 post-css**
+
+post-css 是 CSS 的转换工具， css->AST->插件->css
+
+插件案例
+
+- autoprefixer： 自动管理 CSS 属性的浏览器前缀
+- postcss-pxtorem： px 转换为 rem
+
+## 配置 vite 自动按需引用 vant 组件
+
+- 按需加载可以优化包体积，优化加载性能
+
+使用 unplugin-vue-components 可以不需要我们再项目里写引入的代码
