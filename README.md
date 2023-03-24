@@ -271,3 +271,9 @@ post-css 是 CSS 的转换工具， css->AST->插件->css
 - 按需加载可以优化包体积，优化加载性能
 
 使用 unplugin-vue-components 可以不需要我们再项目里写引入的代码
+
+## normalize.css
+
+处理不同浏览器的默认样式
+
+## bem 命名

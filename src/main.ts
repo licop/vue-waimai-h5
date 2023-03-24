@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import { Tabbar, TabbarItem } from 'vant'
+import { Tabbar, TabbarItem, Search, Icon } from 'vant'
 
 import App from './App.vue'
 import router from './router'
@@ -14,6 +14,8 @@ app.use(router)
 
 app.use(Tabbar)
 app.use(TabbarItem)
+app.use(Search)
+app.use(Icon)
 
 const rootValue = 16 // 设计稿的字体
 const rootWidth = 390 // 设计稿宽度
