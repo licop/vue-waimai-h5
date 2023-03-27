@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { ISearchRecomment } from '@/types'
 import OpSearch from '@/components/OpSearch.vue'
 
@@ -9,20 +8,11 @@ interface IProps {
 
 defineProps<IProps>()
 
-const searchValue = ref('test')
-
-const onSearch = (v?: string | number) => {
-  console.log('----search', v)
+interface IEmits {
+  (e: 'searchClick'): void
 }
 
-const onCancel = () => {
-  console.log('----cancel')
-}
-
-const onClear = () => {
-  console.log('----clear')
-} 
-
+const emits = defineEmits<IEmits>()
 </script>
 
 <template>
@@ -34,18 +24,14 @@ const onClear = () => {
       <img class="comments-icon" src="@/assets/imgs/index_page/comments.png" />
     </div>
     <OpSearch
-      v-model="searchValue"
-      show-action 
       shape="round" 
       background="linear-gradient(to right, rgb(53, 200, 250), rgb(31, 175, 243))"
       placeholder="世界茶饮 35减2"
-      @search="onSearch"
-      @cancel="onCancel"
-      @clear="onClear"
-      >
-      <!-- <template #right-icon>
-        搜索
-      </template> -->
+      @inputClick="emits('searchClick')"
+    >
+      <template #right-icon>
+        <div @click="emits('searchClick')">搜索</div>
+      </template>
     </OpSearch >
     <div class="search-recomment">
       <div v-for="v in recomments" :key="v.value" class="tag">
