@@ -9,7 +9,6 @@ instance.interceptors.response.use((res) => {
   const { data: _data } = res
   const { data, code, msg } = _data
   if (code !== 0) {
-    console.log(code, 12)
     showDialog({
       message: msg,
     }).then(() => {
