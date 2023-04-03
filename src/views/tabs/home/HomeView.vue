@@ -5,18 +5,8 @@ import { useToggle } from '@/use/useToggle';
 import { useAsync } from '@/use/useAsync';
 import { fetchHomePageData } from '@/api/home';
 import type { IHomeInfo } from '@/types';
-import OploadingView from '@/components/OploadingView.vue';
-
-const recomments = [
-  {
-    value: 1,
-    label: '牛腩'
-  }, 
-  {
-    value: 2,
-    label: '色拉'
-  }
-]
+import OploadingView from '@/components/OpLoadingView.vue';
+import TheTransformer from './components/TheTransformer.vue';
 
 const [ isSearchViewShow, toggleSearchView ] = useToggle(false)
 const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
@@ -27,9 +17,12 @@ const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
     <Transition name="fade">
       <SearchView v-if="isSearchViewShow" @cancel="toggleSearchView"></SearchView>
     </Transition>
-    <TheTop :recomments="recomments" @searchClick="toggleSearchView" />
-    <OploadingView :loading="pending" type="loading">
-      <div>{{ data }}</div>
+    <TheTop :recomments="data.searchRecomments" @searchClick="toggleSearchView" />
+    <OploadingView :loading="pending" type="skeleton">
+      <div class="home-page__banner">
+        <img v-for="v in data.banner" :key="v.imgUrl" :src="v.imgUrl" />
+      </div>
+      <TheTransformer :data="data.transformer"  />
     </OploadingView>
 
   </div>
@@ -42,5 +35,16 @@ const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
 
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+}
+
+.home-page {
+  background: var(--op-gray-bg-color);
+  &__banner {
+    img {
+      width: 100%;
+      padding-top: 10px;
+      background: #fff;
+    }
+  }
 }
 </style>

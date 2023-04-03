@@ -14,14 +14,14 @@ export interface ISearchResult {
 }
 
 export interface IHomeInfo {
-  banner: Ibanner,
+  banner: IBanner[],
   searchRecomments: ISearchRecomment[],
   transformer: ITransformer[],
   countdown: ICountdown,
   activities: string[]
 }
 
-export interface Ibanner {
+export interface IBanner {
   imgUrl: string
 }
 
