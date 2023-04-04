@@ -4,12 +4,20 @@ import SearchView from '@/views/search/SearchView.vue';
 import { useToggle } from '@/use/useToggle';
 import { useAsync } from '@/use/useAsync';
 import { fetchHomePageData } from '@/api/home';
-import type { IHomeInfo } from '@/types';
+import type { ICountdown, IHomeInfo } from '@/types';
 import OploadingView from '@/components/OpLoadingView.vue';
 import TheTransformer from './components/TheTransformer.vue';
+import ScrollBar from './components/ScrollBar.vue';
 
 const [ isSearchViewShow, toggleSearchView ] = useToggle(false)
-const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
+const { pending, data } = useAsync(fetchHomePageData, {
+  banner: [],
+  searchRecomments: [],
+  transformer: [],
+  scrollBarInfoList: [],
+  countdown: {} as ICountdown,
+  activities: []
+} as IHomeInfo)
 </script>
 
 <template>
@@ -22,9 +30,9 @@ const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
       <div class="home-page__banner">
         <img v-for="v in data.banner" :key="v.imgUrl" :src="v.imgUrl" />
       </div>
-      <TheTransformer :data="data.transformer"  />
+      <TheTransformer :data="data.transformer"/>
+      <ScrollBar :data="data.scrollBarInfoList" :height="40" />
     </OploadingView>
-
   </div>
 </template>
 
