@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ICountdown } from '@/types';
+import { useCountDown } from '@/use/useCountDown';
 
 interface IProps {
   data: ICountdown
@@ -7,20 +8,30 @@ interface IProps {
 
 const props = defineProps<IProps>()
 
+const countDown = useCountDown({
+  time: props.data.time,
+  millisecond: false
+})
+
+// 开始计时
+countDown.start()
+const { current } = countDown
+
 const padStart = (num: number) => {
   return num.toString().padStart(2, '0')
 }
+
 </script>
 
 <template>
   <div class="home-countdown">
     <div class="home-countdown__info">
       <img class="logo" src="@/assets/imgs/index_page/count-down.png"  />
-      <span class="number">{{ padStart(1) }}</span>
+      <span class="number">{{ padStart(current.hours) }}</span>
       <span class="colon">:</span>
-      <span class="number">{{ padStart(2) }}</span>
+      <span class="number">{{ padStart(current.mintutes) }}</span>
       <span class="colon">:</span>
-      <span class="number">{{ padStart(4) }}</span>
+      <span class="number">{{ padStart(current.seconds) }}</span>
     </div>
     <div class="home-countdown__goods">
       <img class="goods-img" :src="data.goods.imgUrl"/>
