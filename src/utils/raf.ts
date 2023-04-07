@@ -10,3 +10,6 @@ export const cancelRAF =
     clearTimeout(id)
   } 
   
+export const doubleRaf = (fn: () => void) => {
+  rAF(() => rAF(fn))
+}

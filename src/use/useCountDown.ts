@@ -111,7 +111,7 @@ export function useCountDown(options: UseCountDownOptions) {
     counting = false
     cancelRAF(rafId)
   }
-
+  
   const reset = (totalTime = options.time) => {
     pause()
     remain.value = totalTime

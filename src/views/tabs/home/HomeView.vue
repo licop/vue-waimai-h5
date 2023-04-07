@@ -9,6 +9,8 @@ import OploadingView from '@/components/OpLoadingView.vue';
 import TheTransformer from './components/TheTransformer.vue';
 import ScrollBar from './components/ScrollBar.vue';
 import CountDown from './components/CountDown.vue';
+import OpSwipe from '@/components/swipe/OpSwipe';
+import OpSwipeItem from '@/components/swipe/OpSwipeItem';
 
 const [ isSearchViewShow, toggleSearchView ] = useToggle(false)
 const { pending, data } = useAsync(fetchHomePageData, {
@@ -35,6 +37,11 @@ const { pending, data } = useAsync(fetchHomePageData, {
       <ScrollBar :data="data.scrollBarInfoList" :height="40" />
       <div class="home-page__activity">
         <CountDown :data="data.countdown" />
+        <OpSwipe class="home-page__activity__swipe" :autoPlay="3000" :loop="true">
+          <OpSwipeItem v-for="v in data.activities" :key="v">
+            <img :src="v" />
+          </OpSwipeItem>
+        </OpSwipe>
       </div>
     </OploadingView>
   </div>
@@ -51,6 +58,7 @@ const { pending, data } = useAsync(fetchHomePageData, {
 
 .home-page {
   background: var(--op-gray-bg-color);
+  padding-bottom: 70px;
   &__banner {
     img {
       width: 100%;
@@ -63,6 +71,15 @@ const { pending, data } = useAsync(fetchHomePageData, {
     justify-content: space-between;
     align-items: center;
     margin: 10px;
+    &__swipe {
+      border-radius: 8px;
+      width: 180px;
+      height: 170px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
 </style>
