@@ -283,3 +283,12 @@ post-css 是 CSS 的转换工具， css->AST->插件->css
 ## 倒计时为什么要使用 requestAnimationFrame
 
 因为 setTimeout 和 setInterval 不准
+
+## 列表滚动加载
+
+- 移动端 web 应用里都会有列表加载
+- 考虑性能，采用分页来加载数据
+- 当列表滚动到快要"到底"的时候, 当列表的底部与滚动容器的底部距离某个特定值 offset 的时候
+- getBoundingClientRect 来获取元素与视图 viewport 的相对位置
+- placeholder 节点来标记列表底部的位置
+- placeholderRect.bottom - scrollParentRect.bottom <= offset

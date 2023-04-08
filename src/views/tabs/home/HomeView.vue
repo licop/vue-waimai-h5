@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import TheTop from './components/TheTop.vue';
 import SearchView from '@/views/search/SearchView.vue';
 import { useToggle } from '@/use/useToggle';
@@ -11,6 +12,8 @@ import ScrollBar from './components/ScrollBar.vue';
 import CountDown from './components/CountDown.vue';
 import OpSwipe from '@/components/swipe/OpSwipe';
 import OpSwipeItem from '@/components/swipe/OpSwipeItem';
+import { PRIMARY_COLOR, TRANSPARENT } from '@/config/index'
+import { HOME_TABS } from './config'
 
 const [ isSearchViewShow, toggleSearchView ] = useToggle(false)
 const { pending, data } = useAsync(fetchHomePageData, {
@@ -21,6 +24,12 @@ const { pending, data } = useAsync(fetchHomePageData, {
   countdown: {} as ICountdown,
   activities: []
 } as IHomeInfo)
+
+const tabBackgroundColor = ref(TRANSPARENT)
+
+const onTabScroll = ({ isFixed }: {isFixed: boolean}) => {
+  tabBackgroundColor.value = isFixed ? 'white': TRANSPARENT
+}
 </script>
 
 <template>
@@ -28,22 +37,35 @@ const { pending, data } = useAsync(fetchHomePageData, {
     <Transition name="fade">
       <SearchView v-if="isSearchViewShow" @cancel="toggleSearchView"></SearchView>
     </Transition>
-    <TheTop :recomments="data.searchRecomments" @searchClick="toggleSearchView" />
-    <OploadingView :loading="pending" type="skeleton">
-      <div class="home-page__banner">
-        <img v-for="v in data.banner" :key="v.imgUrl" :src="v.imgUrl" />
-      </div>
-      <TheTransformer :data="data.transformer"/>
-      <ScrollBar :data="data.scrollBarInfoList" :height="40" />
-      <div class="home-page__activity">
-        <CountDown :data="data.countdown" />
-        <OpSwipe class="home-page__activity__swipe" :autoPlay="3000" :loop="true">
-          <OpSwipeItem v-for="v in data.activities" :key="v">
-            <img :src="v" />
-          </OpSwipeItem>
-        </OpSwipe>
-      </div>
-    </OploadingView>
+    <div v-show="!isSearchViewShow">
+      <TheTop :recomments="data.searchRecomments" @searchClick="toggleSearchView" />
+      <OploadingView :loading="pending" type="skeleton">
+        <div class="home-page__banner">
+          <img v-for="v in data.banner" :key="v.imgUrl" :src="v.imgUrl" />
+        </div>
+        <TheTransformer :data="data.transformer"/>
+        <ScrollBar :data="data.scrollBarInfoList" :height="40" />
+        <div class="home-page__activity">
+          <CountDown :data="data.countdown" />
+          <OpSwipe class="home-page__activity__swipe" :autoPlay="3000" :loop="true">
+            <OpSwipeItem v-for="v in data.activities" :key="v">
+              <img :src="v" />
+            </OpSwipeItem>
+          </OpSwipe>
+        </div>
+        <VanTabs 
+          sticky 
+          offset-top="54px" 
+          :color="PRIMARY_COLOR" 
+          :background="tabBackgroundColor" 
+          @scroll="onTabScroll"   
+        >
+          <VanTab v-for="v in HOME_TABS" :key="v.value" :title="v.title">
+            <component :is="v.component"></component>
+          </VanTab>
+        </VanTabs>
+      </OploadingView>
+    </div>
   </div>
 </template>
 
