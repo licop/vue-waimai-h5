@@ -292,3 +292,11 @@ post-css 是 CSS 的转换工具， css->AST->插件->css
 - getBoundingClientRect 来获取元素与视图 viewport 的相对位置
 - placeholder 节点来标记列表底部的位置
 - placeholderRect.bottom - scrollParentRect.bottom <= offset
+
+## 使用 IntersectionObserver 实现图片懒加载
+
+## Vue3 插件机制
+
+- app.component() 和 app.directive()
+- app.provide()
+- app.config.globalProperties
