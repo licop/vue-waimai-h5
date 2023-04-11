@@ -320,3 +320,13 @@ useAuth 处理登录逻辑 --> useUserStore 处理用户信息 --> useLocalStora
 - 更简洁直接的 api
 - 组合式风格的 api
 - 更完善的类型推导
+
+## localStorage 和 sessionStorage
+
+- localStorage 理论上永久有效除非主动清除，适合持久化缓存数据
+- sessionStorage 仅在当前网页会话下有效，关闭页面和浏览器后被清除， 页面默认的偏好设置
+
+localStorage 使用场景
+
+- 用户信息，登录状态
+- 页面的默认偏好设置，用户引导
