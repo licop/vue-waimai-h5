@@ -1,6 +1,8 @@
 #app {
   --op-primary-color: rgb(31, 175, 243)
+  --op-gray-bg-color: rgb(244, 244, 244)
 }
+
 .op {
   &-thin-border {
     color: rgb(247, 68, 68);
@@ -30,6 +32,14 @@
   }
   &-lazyload {
     background-color: rgb(173, 171, 171);
+  }
+  &-fullscreen {
+    background: var(--op-gray-bg-color);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
 

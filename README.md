@@ -300,3 +300,23 @@ post-css 是 CSS 的转换工具， css->AST->插件->css
 - app.component() 和 app.directive()
 - app.provide()
 - app.config.globalProperties
+
+## 整体登录逻辑
+
+useAuth 处理登录逻辑 --> useUserStore 处理用户信息 --> useLocalStorage 保存信息
+
+- 前端在用户登录时 useAuth 的 login 函数给后端发送登录请求
+- 后端根据用户账号密码登信息，校验成功后，返回用户信息及对应 token
+- 前端拿到对应信息和 token 后，使用 useUserStore 和 useLocalStorage 分别保存到 store 和 localStorage 中
+- 当前端需要判断用户登录状态时，就会读取 store 信息，以及发送需要鉴权的请求时，自动带上 token 信息
+
+## 什么是 pinia
+
+- vue 官方提供的一个拥有组合式 API 的 Vue 状态管理库
+- 允许你跨组件或页面共享状态
+
+相比于 vuex
+
+- 更简洁直接的 api
+- 组合式风格的 api
+- 更完善的类型推导
