@@ -4,26 +4,26 @@ import { useAsync } from '@/use/useAsync';
 import { fetchShopPageData } from '@/api/shop'
 import { useRoute } from 'vue-router';
 import OpLoadingView from '@/components/OpLoadingView.vue';
-import GoodsList from './components/GoodsList.vue'
 import ShopHeader from './component/ShopHeader.vue'
-import OpList from '@/components/list/OpList';
+import GoodsList from './component/GoodsList.vue'
+import OpTodo from '@/components/OpTodo.vue'
 import { PRIMARY_COLOR } from '@/config';
 
 const TAB_LIST = [
   {
     value: 1,
-    label: '全部商品'
+    label: '全部商品',
     component: GoodsList
   },
   {
     value: 2,
     label: '评价',
-    component: OpList
+    component: OpTodo
   },
   {
     value: 3,
     label: '商家',
-    component: OpList
+    component: OpTodo
   }
 ]
 
@@ -54,7 +54,6 @@ const { data, pending } = useAsync(() => fetchShopPageData(id as string), {
 })
 
 const onClickLeft = () => history.back() 
-
 </script>
 
 <template>
@@ -67,11 +66,16 @@ const onClickLeft = () => history.back()
            <component :is='v.component'></component>
         </VanTab>
       </VanTabs>
-      <ShopCart v-if="active === 1" />
+      <!-- <ShopCart v-if="active === 1" /> -->
     </OpLoadingView>
   </div>
 </template>
 
-<style scoped >
-
+<style lang="scss">
+.shop-page {
+  .van-tabs__line,
+  .van-nav-bar {
+    z-index: 0;
+  }
+}
 </style>
