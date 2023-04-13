@@ -5,6 +5,7 @@ import { useAsync } from '@/use/useAsync';
 import { useRoute } from 'vue-router';
 import { fetchGoodsListData } from '@/api/goods.js'
 import type { IGood, IMenu } from '@/types'
+import GoodItem from './GoodItem.vue';
 
 const route = useRoute()
 const id = route.params.id
@@ -26,9 +27,7 @@ const categoryActive = ref(0)
       <div class="list">
         <template v-for="v in data" :key="v.label">
           <div class="category-name">{{ v.label }}</div>
-          <div v-for="cv in v.goods" :key="cv.id">
-            {{ cv.name }}
-          </div>
+          <GoodItem v-for="cv in v.goods" :key="cv.id" :data="cv" />
         </template>
         
       </div>
