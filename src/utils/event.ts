@@ -51,7 +51,6 @@ export class EventEmitter {
       const fn = events[i];
       if(fn) {
         ret = fn.apply(this, args) as unknown
-        console.log(ret)
         if(ret === true) {
           return ret
         }

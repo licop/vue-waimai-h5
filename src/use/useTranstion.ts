@@ -1,4 +1,6 @@
 import { ref } from 'vue';
+import { useTimeout } from './useTimeout';
+import { useLifeHooks } from './useLifeHooks';
 
 interface IEnterItem {
   isShown: boolean,
@@ -6,6 +8,8 @@ interface IEnterItem {
 }
 
 export function useTransition(count = 10) {
+  // 确实在setup的时机执行声明周期函数
+  const { onUnmounted } = useLifeHooks()
   const createItems = (_count: number) => {
     const result = []
     for(let i = 0; i < _count; i++) {
@@ -44,13 +48,13 @@ export function useTransition(count = 10) {
   
   const enter = (el: Element, done: () => void) => {
     el.addEventListener('transitionend', done)
-    setTimeout(() => {
+    useTimeout(() => {
       (el as HTMLElement).style.transform = `translate3d(0, 0, 0)`
       const inner = el.getElementsByClassName('inner')[0] as HTMLElement
       if(inner) {
         inner.style.transform = `translate3d(0, 0, 0)`
       }
-    })
+    }, undefined, onUnmounted)
   }
 
   const afterEnter = (el: Element) => {

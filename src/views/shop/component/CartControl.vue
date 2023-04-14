@@ -4,7 +4,6 @@ import { useCartStore } from '@/stores/cart';
 import { computed } from '@vue/reactivity';
 import { useEventBus } from '@/use/useEventBus'
 
-
 interface IProps {
   data: IGood
 }
