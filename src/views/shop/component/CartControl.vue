@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import type { IGood } from '@/types';
-import { ref } from 'vue'
+import { useCartStore } from '@/stores/cart';
+import { computed } from '@vue/reactivity';
 
 interface IProps {
   data: IGood
 }
 const props = defineProps<IProps>()
-const cartCount = ref(props.data.cartCount)
+const cartCount = computed(() => store.cartCountById(props.data.id))
+const store = useCartStore()
+
 const minus = () => {
-  cartCount.value--
+  store.removePruductFromCart(props.data)
 }
 const add = () => {
-  cartCount.value++
+  store.pushPruductToCart(props.data)
 }
 </script>
 
