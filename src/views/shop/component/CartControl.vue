@@ -2,6 +2,8 @@
 import type { IGood } from '@/types';
 import { useCartStore } from '@/stores/cart';
 import { computed } from '@vue/reactivity';
+import { useEventBus } from '@/use/useEventBus'
+
 
 interface IProps {
   data: IGood
@@ -9,12 +11,15 @@ interface IProps {
 const props = defineProps<IProps>()
 const cartCount = computed(() => store.cartCountById(props.data.id))
 const store = useCartStore()
+const eventBus = useEventBus()
 
 const minus = () => {
   store.removePruductFromCart(props.data)
 }
-const add = () => {
+
+const add = (event: Event) => {
   store.pushPruductToCart(props.data)
+  eventBus.emit('cart-add', event.target)
 }
 </script>
 

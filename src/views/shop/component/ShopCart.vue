@@ -3,7 +3,9 @@ import { useCartStore } from '@/stores/cart';
 import { ref, computed } from 'vue'
 import CartLogo from '@/assets/imgs/shop_page/shop-cart/shop-cart.png'
 import EmptyCartLogo from '@/assets/imgs/shop_page/shop-cart/shop-cart-o.png'
-import { useToggle } from '@vant/use';
+import { useToggle } from '@/use/useToggle';
+import { useTransition } from '@/use/useTranstion';
+import { useEventBus } from '@/use/useEventBus'
 import GoodItem from './GoodItem.vue';
 import { showConfirmDialog } from 'vant';
 
@@ -11,6 +13,13 @@ const store = useCartStore()
 const packageFee = ref(5)
 const cartLogo = computed(() => (store.total ? CartLogo : EmptyCartLogo))
 const [ isCartListShown, toggleCartListShown ] = useToggle(false)
+const eventBus = useEventBus()
+const { items, start, beforeEnter, enter, afterEnter } = useTransition()
+
+eventBus.on('cart-add', (el) => {
+  start(el)
+})
+
 const showCartListPopup = () => {
   if(!store.total) {
     return
@@ -24,7 +33,7 @@ const removeAll = () => {
     store.setCartItems([])
     toggleCartListShown()
   }).catch(() => {
-    
+
   })
 }
 </script>
@@ -100,8 +109,16 @@ const removeAll = () => {
         </div>
       </div>
     </div>
+    <div class="shop-cart__ball-container">
+      <div v-for="(v, i) in items" :key="i">
+        <Transition @beforeEnter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
+          <div v-show="v.isShown" class="ball">
+            <div class="inner"></div>
+          </div>
+        </Transition>
+      </div>
+    </div>
   </div>
-
 </template>
 
 <style lang="scss" scoped>
