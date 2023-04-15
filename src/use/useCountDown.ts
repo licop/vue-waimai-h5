@@ -1,3 +1,4 @@
+// 倒计时组件
 import { ref, computed } from 'vue'
 import { rAF, cancelRAF } from '@/utils/raf'
 

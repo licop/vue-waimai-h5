@@ -31,7 +31,6 @@ const onClear = () => {
   emits('update:modelValue', '')
   emits('clear')
 }
-
 </script>
 
 <template>

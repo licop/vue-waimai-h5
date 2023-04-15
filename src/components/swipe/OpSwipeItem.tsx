@@ -10,6 +10,7 @@ const [name, bem] = createNamespace('swipe-item')
 export default defineComponent({
   name,
   setup(props, { slots }) {
+    // 通过useParent获取父组件传递过来的值
     const { parent } = useParent(SWIPE_KEY)
     const state = reactive({
       offset: 0
@@ -34,6 +35,7 @@ export default defineComponent({
       state.offset = offset
     }
     
+    // 将子组件的方法暴露给父组件
     useExpose({ setOffset })
     
     return () => (

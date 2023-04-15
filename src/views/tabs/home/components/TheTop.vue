@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { ISearchRecomment } from '@/types'
 import OpSearch from '@/components/OpSearch.vue'
-
 interface IProps {
   recomments: ISearchRecomment[]
 }

@@ -7,7 +7,6 @@ import { doubleRaf } from '@/utils/raf';
 import { useChildren } from '@/use/useChildren';
 import { useTouch } from '@/use/useTouch';
 import { useEventListener } from '@/use/useEventListener';
-
 import './OpSwipe.scss'
 
 const [name, bem] = createNamespace('swipe')
@@ -63,10 +62,9 @@ export default defineComponent({
       swiping: false
     })
     const touch = useTouch()
-
+    // 获取子组件的instance数组
     const { children, linkChildren } = useChildren(SWIPE_KEY)
     const delta = computed(() => props.vertical ? touch.deltaY.value: touch.deltaX.value)
-
     const count = computed(() => children.length)
     const size = computed(() => state[props.vertical ? 'height' : 'width'])
     const trackSize = computed(() => count.value * size.value)

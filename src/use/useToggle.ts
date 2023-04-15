@@ -1,3 +1,4 @@
+// 用于在true和false之间进行切换
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 
@@ -8,3 +9,4 @@ export function useToggle(initState: boolean): [Ref<boolean>, () => void] {
   }
   return [state, toggle]
 }
+

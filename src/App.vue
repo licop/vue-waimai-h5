@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { fetchTest } from '@/api/test'
-
-fetchTest()
 </script>
 
 <template>
+  <!-- 路由匹配到的组件将渲染在这里 -->
   <RouterView />
 </template>
 

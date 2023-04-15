@@ -10,12 +10,13 @@ const active = ref(route.name as string)
 
 watch(active, (nv) => {
   router.push({
-    name: nv,
+    name: nv
   })
 })
 </script>
 
 <template>
+  <!-- 路由匹配到的组件将渲染在这里 -->
   <RouterView />
   <VanTabbar v-model="active">
     <VanTabbarItem name="home" icon="home-o">首页</VanTabbarItem>

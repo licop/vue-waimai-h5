@@ -1,7 +1,8 @@
+// 用于获取请求的数据，和是否请求完成pending
 import { ref } from 'vue'
 import type { UnwrapRef } from 'vue'
 
-export function useAsync<T>(asyncFn: () => Promise<T>, initValue: T, immediate = true ) {
+export function useAsync<T>(asyncFn: () => Promise<T>, initValue: T, immediate = true) {
   const pending = ref(false)
   const data = ref(initValue)
   const error = ref(null)
@@ -16,7 +17,7 @@ export function useAsync<T>(asyncFn: () => Promise<T>, initValue: T, immediate =
       pending.value = false
     })
   }
-
+  
   if(immediate) {
     execute()
   }
@@ -28,3 +29,4 @@ export function useAsync<T>(asyncFn: () => Promise<T>, initValue: T, immediate =
     execute
   }
 }
+

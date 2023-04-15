@@ -29,7 +29,6 @@
           ~暂无推荐~
         </div>
       </template>
-      
     </div>
   </div>
 </template>
@@ -72,7 +71,6 @@ const [INIT, DONE, DOING] = [-1, 0, 1]
 const searchStatus = ref(INIT)
 
 const onSearch = async (v?: string | number) => {
-  console.log('onSearch===>', v)
   try {
     searchStatus.value = DOING
     const { list } = await fetchSearchData(v as string)
@@ -100,12 +98,12 @@ const onTagClick = (v: string) => {
 
 const debounceValue = useDebounce(searchValue, 1000)
 watch(debounceValue, (nv) => {
-    if(!nv) {
-      searchResult.value = []
-      return 
-    }
-    onSearch(nv as string)
-  }) 
+  if(!nv) {
+    searchResult.value = []
+    return 
+  }
+  onSearch(nv as string)
+}) 
 </script>
 
 <style lang="scss">

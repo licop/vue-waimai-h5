@@ -1,3 +1,4 @@
+// 获取元素的大小及其相对于视口的位置
 import type { Ref } from 'vue'
 import { unref } from 'vue'
 

@@ -18,7 +18,7 @@ export function useParent<T>(key: InjectionKey<ParentProvide<T>>) {
       parent: null
     }
   }
-
+  
   const instance = getCurrentInstance()
   
   const { link, unlink } = parent
