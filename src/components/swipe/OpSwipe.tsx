@@ -1,3 +1,4 @@
+// 组件使用jsx，因为相比template可以支持更动态的需求
 import { defineComponent, ref, onMounted, onBeforeMount, watch } from 'vue';
 import { createNamespace } from '@/utils/create';
 import { reactive } from 'vue';

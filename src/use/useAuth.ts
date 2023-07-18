@@ -13,7 +13,7 @@ export function useAuth() {
   const logout = () => {
     store.removeInfo()
   }
-
+  
   return {
     user,
     login,

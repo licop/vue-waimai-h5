@@ -1,3 +1,4 @@
+// 实现图片懒加载
 import type { App, DirectiveBinding } from 'vue'
 
 const vLazy = (observer: IntersectionObserver) => {

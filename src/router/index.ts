@@ -5,6 +5,7 @@ import OrderView from '@/views/tabs/order/OrderView.vue'
 import MeView from '@/views/tabs/me/MeView.vue'
 import LoginView from '@/views/login/LoginView.vue'
 import ShopView from '@/views/shop/ShopView.vue'
+import GoodsView from '@/views/goods/GoodsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,8 +45,25 @@ const router = createRouter({
       name: 'shop',
       path: '/shop/:id',
       component: ShopView
+    },
+    {
+      name: 'goods',
+      path: '/goods/:id',
+      component: GoodsView
     }
   ]
 })
+
+// router.beforeEach((to, from) => {
+//   if(to.meta.reqeireAuth && !auth.isLoginedIn()) {
+//     return {
+//       path: '/login',
+//       // 保存我们所在的位置，以便以后再来
+//       query: {
+//         redirect: to.fullPath
+//       }
+//     }
+//   }  
+// })
 
 export default router

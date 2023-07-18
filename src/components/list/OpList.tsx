@@ -1,3 +1,4 @@
+// 组件使用jsx，因为相比template可以支持更动态的需求
 import { defineComponent, ref, onMounted, onUpdated, nextTick } from 'vue'
 import { Loading as VanLoading } from 'vant'
 import { createNamespace } from '@/utils/create'
@@ -32,11 +33,12 @@ export default defineComponent({
       type: String,
     },
   },
+
   setup(props, { slots, emit }) {
     const root = ref()
     const placeholder = ref()
     const scrollParent = useScrollParent(root)
-
+    
     const check = () => {
       nextTick(() => {
         if(props.loading || props.finished) {
@@ -76,6 +78,7 @@ export default defineComponent({
         )
       }
     }
+    
     const renderFinishedText = () => {
       if (props.finished) {
         const text = slots.finished ? slots.finished() : props.finishedText
@@ -97,6 +100,7 @@ export default defineComponent({
     return () => {
       const Content = slots.default?.()
       const Placeholder = <div ref={placeholder} class={bem('palceholder')}></div>
+      
       return (
         <div ref={root} class={bem()}>
           {props.direction === 'down' ? Content : Placeholder}

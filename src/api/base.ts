@@ -6,6 +6,7 @@ const instance = axios.create({
   baseURL: '/api',
 })
 
+// 请求拦截器
 instance.interceptors.request.use((config) => {
   const { value: token } = useLocalStorage('token', '')
   if(config.headers && token.value) {
@@ -14,6 +15,7 @@ instance.interceptors.request.use((config) => {
   return config
 })
 
+// 相应拦截器
 instance.interceptors.response.use((res) => {
   const { data: _data } = res
   const { data, code, msg } = _data

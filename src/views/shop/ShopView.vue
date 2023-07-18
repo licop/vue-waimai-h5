@@ -11,7 +11,6 @@ import OpTodo from '@/components/OpTodo.vue'
 import ShopCart from './component/ShopCart.vue';
 import { PRIMARY_COLOR } from '@/config';
 
-
 const TAB_LIST = [
   {
     value: 1,

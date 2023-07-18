@@ -57,7 +57,7 @@ export const useCartStore = defineStore('cart', () => {
       }
     }
   }
-
+  
   const setCartItems = (items: IGood[]) => {
     state.items = items
     state.checkedIds = items.filter(v => v.checked).map(v => v.id)

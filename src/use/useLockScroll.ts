@@ -1,3 +1,4 @@
+// 禁止滚动
 import { onDeactivated, watch, onBeforeUnmount } from 'vue'
 import { onMountedOrActivated } from './onMountedOrActivated'
 
@@ -26,6 +27,7 @@ export function useLockScroll(shouldLock: () => boolean) {
       lock()
     }
   })
+
   const destory = () => shouldLock() && unlock()
   onDeactivated(() => destory)
   onBeforeUnmount(() => destory)
